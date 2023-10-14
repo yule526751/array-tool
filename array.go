@@ -59,22 +59,11 @@ func RemoveRepeated[T intUintFloat | stringRune](arr []T) []T {
 	return result
 }
 
-// 去除0值
-func ArrRemoveZero[T intUintFloat](arr []T) []T {
+// 去除值
+func RemoveValue[T intUintFloat](arr []T, v T) []T {
 	result := make([]T, 0, len(arr))
 	for _, item := range arr {
-		if item != 0 {
-			result = append(result, item)
-		}
-	}
-	return result
-}
-
-// 去除空字符串
-func RemoveEmpty(arr []string) []string {
-	result := make([]string, 0, len(arr))
-	for _, item := range arr {
-		if item != "" {
+		if item != v {
 			result = append(result, item)
 		}
 	}
