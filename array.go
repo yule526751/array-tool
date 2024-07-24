@@ -69,3 +69,32 @@ func RemoveValue[T intUintFloat](arr []T, v T) []T {
 	}
 	return result
 }
+
+// 切片分组
+// size: 分组大小
+func Chunk[T intUintFloat | stringRune](arr []T, size uint) [][]T {
+	l := uint(len(arr))
+	if l == 0 {
+		return nil
+	}
+	if size == 0 {
+		return nil
+	}
+	if size >= l {
+		return [][]T{arr}
+	}
+
+	var (
+		result [][]T
+		i      uint
+		end    uint
+	)
+	for i = 0; i < l; i += size {
+		end = i + size
+		if end > l {
+			end = l
+		}
+		result = append(result, arr[i:end])
+	}
+	return result
+}
