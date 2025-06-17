@@ -1,5 +1,14 @@
 package array
 
+import (
+	"fmt"
+	"strings"
+)
+
+type intUint interface {
+	int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64
+}
+
 type intUintFloat interface {
 	int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64 | float32 | float64
 }
@@ -97,4 +106,12 @@ func Chunk[T intUintFloat | stringRune](arr []T, size uint) [][]T {
 		result = append(result, arr[i:end])
 	}
 	return result
+}
+
+func IntJoin[T intUint](arr []T, sep string) (res string) {
+	for _, t := range arr {
+		res += fmt.Sprintf("%d%s", t, sep)
+	}
+	res = strings.TrimRight(res, sep)
+	return
 }
